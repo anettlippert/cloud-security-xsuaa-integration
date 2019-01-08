@@ -6,7 +6,7 @@
  */
 package com.sap.cloud.security.xsuaa.test;
 
-import static com.sap.cc.jwtgenerator.TestConstants.*;
+import static com.sap.cloud.security.xsuaa.test.TestConstants.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
