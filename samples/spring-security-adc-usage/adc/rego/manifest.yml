@@ -1,0 +1,7 @@
+---
+applications:
+- name: my-rego
+  memory: 64M
+  disk: 64M
+  buildpacks:
+    - staticfile_buildpack
