@@ -15,6 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.RequestPostProcessor;
 import org.springframework.util.Assert;
 
+import java.util.*;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -31,10 +33,17 @@ public class TestControllerTest {
 
 	@Before
 	public void setUp() {
+		Map<String, Object> xsSystemAttributesClaim = new HashMap<>();
+		Map<String,Object> xsSystemAttributesClaims = new HashMap<>();
+		xsSystemAttributesClaims.put("xs.saml.groups", Collections.singletonList("G1"));
+		xsSystemAttributesClaims.put("xs.rolecollections", Collections.singletonList("Viewer"));
+		xsSystemAttributesClaim.put("xs.system.attributes", xsSystemAttributesClaims);
+
 		jwt_viewer = new JwtGenerator(xsuaaServiceConfiguration.getClientId())
 				.setUserName(VIEWER)
 				.addScopes(getGlobalScope("Read"))
-				//.addAttribute("confidentiality_level", new String[]{"PUBLIC"})
+				.addAttribute("confidentiality_level", new String[]{"PUBLIC"})
+				.addCustomClaims(xsSystemAttributesClaim)
 				.getTokenForAuthorizationHeader();
 	}
 
@@ -77,5 +86,7 @@ public class TestControllerTest {
 		Assert.hasText(xsuaaServiceConfiguration.getAppId(), "make sure that xsuaa.xsappname is configured properly.");
 		return xsuaaServiceConfiguration.getAppId() + "." + localScope;
 	}
+
+
 }
 

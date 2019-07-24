@@ -86,7 +86,7 @@ public class ADCSecurityExpression extends SecurityExpressionRoot implements Met
 			OPADataResponse response = restTemplate.postForObject(opaUrl, request, OPADataResponse.class);
 			isAuthorized = response.getResult();
 		} catch (HttpClientErrorException e) {
-			logger.error("Error Accession ADC service. ", e);
+			logger.error("Error accessing ADC service.", e);
 		}
 		return isAuthorized;
 	}

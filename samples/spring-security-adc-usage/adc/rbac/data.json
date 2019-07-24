@@ -23,7 +23,7 @@
                 "PUBLIC"
             ]
         },
-        "Advertiser": {
+        "Administrator": {
             "confidentiality_level": [
                 "PUBLIC",
                 "INTERNAL",
