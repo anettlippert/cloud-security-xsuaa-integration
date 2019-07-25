@@ -52,7 +52,7 @@ public class ADCSecurityExpression extends SecurityExpressionRoot implements Met
 		input.put("scope", globalScope);
 
 		hasScope = checkAuthorization(input);
-		logger.info("Has user scope %s ? %s", globalScope, hasScope);
+		logger.info("Has user scope '{}' ? {}", globalScope, hasScope);
 
 		return hasScope;
 	}
@@ -67,7 +67,7 @@ public class ADCSecurityExpression extends SecurityExpressionRoot implements Met
 
 		hasAttribute = checkAuthorization(input);
 
-		logger.info("Has user attribute '%s' = '%s'? %s", attributeName, attributeValue, hasAttribute);
+		logger.info("Has user attribute '{}' = '{}'? {}", attributeName, attributeValue, hasAttribute);
 		return hasAttribute;
 	}
 
