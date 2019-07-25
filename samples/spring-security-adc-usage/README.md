@@ -66,13 +66,8 @@ should return true, whereas this payload with same `token` but different `role` 
 }
 ```
 should return false, as the token does not contain a `Administrator` role collection. 
-Use this token 
-```
-eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImprdSI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzMxOTUvdG9rZW5fa2V5cyIsImtpZCI6ImxlZ2FjeS10b2tlbi1rZXkifQ.eyJleHRfYXR0ciI6eyJ6ZG4iOiIifSwiemlkIjoidWFhIiwiemRuIjoiIiwiZ3JhbnRfdHlwZSI6InVybjppZXRmOnBhcmFtczpvYXV0aDpncmFudC10eXBlOnNhbWwyLWJlYXJlciIsInVzZXJfbmFtZSI6InZpZXdlciIsIm9yaWdpbiI6InVzZXJJZHAiLCJ4cy5zeXN0ZW0uYXR0cmlidXRlcyI6eyJ4cy5yb2xlY29sbGVjdGlvbnMiOlsiQWRtaW5pc3RyYXRvciJdfSwiZXhwIjo2OTc0MDMxNjAwLCJpYXQiOjE1NjQwNjIyODAsImVtYWlsIjoidmlld2VyQHRlc3Qub3JnIiwiY2lkIjoic2Itc3ByaW5nLXNlY3VyaXR5LWFkYy11c2FnZSF0MTQ4NjYifQ.qzIf2Kfg5xTaVj1FtQDRfQjNzOFcq4NQi7bU-ECeLPyWXLg8ucttMpwXSLcPMxKf6IcmVyLjRsf08LS_qLmUO4MYNXzoNwPMmw6oRig8y2HQ8j3GCE3uaCBrmSUJi5cvnI1e4CpceygbRBPUMg7l3QhLMmcOtUYe4c2VSOCb7Haf4xS6Idhw7rHaExrTSA94zx3I7peG3TJtjDHNPeANfiMlHNWVBuq49zQvlE9x_ZniIK_Mie4-UlExrRCL0ep6ty_FfGVZlGb1uBm3KPom-LKvMYlgD0QIGHuVoSgbTwwx_xGJvpFe8tRp95UlbD8vITbtVe0Fsu4VwdpnBv4h8g
-```
-to simulate an admin user.
 
-Apply also a check on scope or attribute values:
+Apply also a check on scope or attribute values using a token that simulates an Admin user:
 ```
 {
 	"input": {
