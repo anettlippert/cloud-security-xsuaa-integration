@@ -37,18 +37,11 @@ public class TestControllerTest {
 	public void setUp() {
 		jwt_viewer = new JwtGenerator(xsuaaServiceConfiguration.getClientId())
 				.setUserName(VIEWER)
-				.addScopes(getGlobalScope("Read"))
-				.addAttribute("confidentiality_level", new String[] { "PUBLIC" })
 				.addCustomClaims(buildSystemAttributesClaim("Viewer"))
 				.getTokenForAuthorizationHeader();
 
 		jwt_admin = new JwtGenerator(xsuaaServiceConfiguration.getClientId())
 				.setUserName(VIEWER)
-				.addScopes(getGlobalScope("Read"))
-				.addScopes(getGlobalScope("Admin"))
-				.addAttribute("confidentiality_level", new String[] { "PUBLIC", "INTERNAL",
-						"CONFIDENTIAL",
-						"STRICTLY_CONFIDENTIAL" })
 				.addCustomClaims(buildSystemAttributesClaim("Administrator"))
 				.getTokenForAuthorizationHeader();
 	}
@@ -96,11 +89,6 @@ public class TestControllerTest {
 
 	private static BearerTokenRequestPostProcessor bearerToken(String token) {
 		return new BearerTokenRequestPostProcessor(token);
-	}
-
-	private String getGlobalScope(String localScope) {
-		Assert.hasText(xsuaaServiceConfiguration.getAppId(), "make sure that xsuaa.xsappname is configured properly.");
-		return xsuaaServiceConfiguration.getAppId() + "." + localScope;
 	}
 
 }
