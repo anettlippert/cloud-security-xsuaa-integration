@@ -52,11 +52,11 @@ Further up-to-date information you can get on sap.help.com:
 - [Maintain Roles for Applications](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/7596a0bdab4649ac8a6f6721dc72db19.html).
 
 ## Access the application
-After deployment, the AppRouter will trigger authentication automatically when you access one of the following URLs:
+After deployment, the Application Router will trigger authentication automatically when you access one of the following URLs:
 
 * `https://spring-security-xsuaa-usage-web-<ID>.<LANDSCAPE_APPS_DOMAIN>/v1/sayHello` - GET request that provides XSUAA user token details, but only if token matches.
 * `https://spring-security-xsuaa-usage-web-<ID>.<LANDSCAPE_APPS_DOMAIN>/v1/method` - GET request to executes a method secured with Spring Global Method Security.
 * `https://spring-security-xsuaa-usage-web-<ID>.<LANDSCAPE_APPS_DOMAIN>/v1/readData` - GET request to read sensitive data via Global Method Security.
 * `https://spring-security-xsuaa-usage-web-<ID>.<LANDSCAPE_APPS_DOMAIN>/v2/sayHello` - GET request that provides generic Jwt info, but only if token matches.
 
-> Note: https://spring-security-xsuaa-usage-web-<ID>.<LANDSCAPE_APPS_DOMAIN> points to the url of the AppRouter. Get all app routes with `cf apps`.
+> Note: https://spring-security-xsuaa-usage-web-<ID>.<LANDSCAPE_APPS_DOMAIN> points to the url of the Application Router. Get all app routes with `cf apps`.

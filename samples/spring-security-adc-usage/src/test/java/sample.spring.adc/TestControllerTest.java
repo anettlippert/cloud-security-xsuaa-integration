@@ -26,25 +26,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class TestControllerTest {
 
 	private String jwt_viewer;
+	private String jwt_admin;
 	private static final String VIEWER = "viewer";
+	private static final String ADMINISTRATOR = "administrator";
 
 	@Autowired
 	private XsuaaServiceConfiguration xsuaaServiceConfiguration;
 
 	@Before
 	public void setUp() {
-		Map<String, Object> xsSystemAttributesClaim = new HashMap<>();
-		Map<String,Object> xsSystemAttributesClaims = new HashMap<>();
-		xsSystemAttributesClaims.put("xs.saml.groups", Collections.singletonList("G1"));
-		xsSystemAttributesClaims.put("xs.rolecollections", Collections.singletonList("Viewer"));
-		xsSystemAttributesClaim.put("xs.system.attributes", xsSystemAttributesClaims);
-
 		jwt_viewer = new JwtGenerator(xsuaaServiceConfiguration.getClientId())
 				.setUserName(VIEWER)
 				.addScopes(getGlobalScope("Read"))
-				.addAttribute("confidentiality_level", new String[]{"PUBLIC"})
-				.addCustomClaims(xsSystemAttributesClaim)
+				.addAttribute("confidentiality_level", new String[] { "PUBLIC" })
+				.addCustomClaims(buildSystemAttributesClaim("Viewer"))
 				.getTokenForAuthorizationHeader();
+
+		jwt_admin = new JwtGenerator(xsuaaServiceConfiguration.getClientId())
+				.setUserName(VIEWER)
+				.addScopes(getGlobalScope("Read"))
+				.addScopes(getGlobalScope("Admin"))
+				.addAttribute("confidentiality_level", new String[] { "PUBLIC", "INTERNAL",
+						"CONFIDENTIAL",
+						"STRICTLY_CONFIDENTIAL" })
+				.addCustomClaims(buildSystemAttributesClaim("Administrator"))
+				.getTokenForAuthorizationHeader();
+	}
+
+	private Map<String, Object> buildSystemAttributesClaim(String... roleCollections) {
+		Map<String, Object> xsSystemAttributesClaim = new HashMap<>();
+		Map<String, Object> xsSystemAttributesClaims = new HashMap<>();
+		xsSystemAttributesClaims.put("xs.rolecollections", roleCollections);
+		xsSystemAttributesClaim.put("xs.system.attributes", xsSystemAttributesClaims);
+//		xsSystemAttributesClaims.put("xs.saml.groups", Collections.singletonList("G1"));
+		return xsSystemAttributesClaim;
 	}
 
 	@Autowired
@@ -53,7 +68,8 @@ public class TestControllerTest {
 	@Test
 	public void readWithoutPermission_403() throws Exception {
 		mockMvc.perform(get("/v1/method")
-				.with(bearerToken(new JwtGenerator(xsuaaServiceConfiguration.getClientId()).getTokenForAuthorizationHeader())))
+				.with(bearerToken(
+						new JwtGenerator(xsuaaServiceConfiguration.getClientId()).getTokenForAuthorizationHeader())))
 				.andExpect(status().isForbidden());
 	}
 
@@ -86,7 +102,6 @@ public class TestControllerTest {
 		Assert.hasText(xsuaaServiceConfiguration.getAppId(), "make sure that xsuaa.xsappname is configured properly.");
 		return xsuaaServiceConfiguration.getAppId() + "." + localScope;
 	}
-
 
 }
 

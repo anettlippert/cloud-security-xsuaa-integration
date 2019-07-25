@@ -15,12 +15,12 @@ public class ADCSecurityExpressionHandler extends DefaultMethodSecurityExpressio
 
 	private XsuaaServiceConfiguration xsuaaServiceConfiguration;
 	private RestTemplate restTemplate;
-	private String opaUrl;
+	private String adcUrl;
 
-	public ADCSecurityExpressionHandler(XsuaaServiceConfiguration xsuaaServiceConfiguration, RestTemplate restTemplate, String opaUrl) {
+	public ADCSecurityExpressionHandler(XsuaaServiceConfiguration xsuaaServiceConfiguration, RestTemplate restTemplate, String adcUrl) {
 		this.restTemplate = restTemplate;
 		this.xsuaaServiceConfiguration = xsuaaServiceConfiguration;
-		this.opaUrl = opaUrl;
+		this.adcUrl = adcUrl;
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class ADCSecurityExpressionHandler extends DefaultMethodSecurityExpressio
 		root.setRoleHierarchy(getRoleHierarchy());
 		root.setRestTemplate(restTemplate);
 		root.setXsuaaServiceConfiguration(xsuaaServiceConfiguration);
-		root.setOpaUrl(opaUrl);
+		root.setAdcUrl(adcUrl);
 		return root;
 	}
 }

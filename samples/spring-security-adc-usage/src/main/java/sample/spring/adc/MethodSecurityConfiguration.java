@@ -20,14 +20,14 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 	@Autowired(required = false)
 	private RestTemplate restTemplate;
 
-	@Value("${OPA_ADDR}")
-	private String opaAddr;
+	@Value("${ADC_URL}")
+	private String adcUrl;
 
 	@Override
 	protected MethodSecurityExpressionHandler createExpressionHandler() {
 		RestTemplate restTemplate = this.restTemplate != null ? this.restTemplate : new RestTemplate();
 		ADCSecurityExpressionHandler expressionHandler =
-				new ADCSecurityExpressionHandler(xsuaaServiceConfiguration, restTemplate, opaAddr);
+				new ADCSecurityExpressionHandler(xsuaaServiceConfiguration, restTemplate, adcUrl);
 		return expressionHandler;
 	}
 }

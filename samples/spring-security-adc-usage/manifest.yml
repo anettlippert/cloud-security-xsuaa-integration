@@ -13,7 +13,7 @@ applications:
   services:
     - xsuaa-adc
   env:
-    OPA_ADDR: https://adc-service-((ID)).((LANDSCAPE_APPS_DOMAIN))
+    ADC_URL: https://adc-service-((ID)).((LANDSCAPE_APPS_DOMAIN))
 # Application Router as web server
 - name: approuter-spring-security-adc-usage
   path: approuter
