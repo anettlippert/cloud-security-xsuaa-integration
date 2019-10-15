@@ -3,42 +3,37 @@
 # configured for EU10. For other landscapes, please adopt LANDSCAPE_APPS_DOMAIN in ../vars.yml
 # If the route is occupied, you might need to change ID in ../vars.yml
 applications:
-# The sample application.
-- name: spring-security-adc-usage
-  instances: 1
-  memory: 896M
+- name: adc-user
+  memory: 1G
+  timeout: 360
   routes:
-    - route: spring-security-adc-usage-((ID)).((LANDSCAPE_APPS_DOMAIN))
+    - route: adc-user-1234.cfapps.sap.hana.ondemand.com
   path: target/spring-security-adc-usage.jar
+  buildpacks:
+    - https://github.com/saescha/opa-builpack-PoC.git
+    - java_buildpack
   services:
-    - xsuaa-adc
+    - uaa-bulletinboard
   env:
-    ADC_URL: https://adc-service-((ID)).((LANDSCAPE_APPS_DOMAIN))
+    ADC_URL: http://localhost:8181
+    
+    
 # Application Router as web server
-- name: approuter-spring-security-adc-usage
+- name: approuter
   path: approuter
   buildpacks:
     - nodejs_buildpack
   memory: 128M
   routes:
-    - route: spring-security-adc-usage-web-((ID)).((LANDSCAPE_APPS_DOMAIN))
+    - route: approuter-1234.cfapps.sap.hana.ondemand.com
   services:
-    - xsuaa-adc
+    - uaa-bulletinboard
   env:
+    TENANT_HOST_PATTERN: "^(.*)-approuter-1234.cfapps.sap.hana.ondemand.com"
     destinations: >
       [
         {"name":"token-destination",
-         "url":"https://spring-security-adc-usage-((ID)).((LANDSCAPE_APPS_DOMAIN))",
+         "url":"https://adc-user-1234.cfapps.sap.hana.ondemand.com",
          "forwardAuthToken": true}
       ]
-# Authorization Decision Controller service
-- name: adc-service
-  path: adc/rbac
-  memory: 512M
-  routes:
-    - route: adc-service-((ID)).((LANDSCAPE_APPS_DOMAIN))
-  buildpacks:
-    - https://github.com/saescha/opa-builpack-PoC.git
-  # directly uploads bundle
-  command: ./opa run -s -c OPAConfig --log-level=debug --addr=[]:$PORT rbac.rego data.json
-...
+

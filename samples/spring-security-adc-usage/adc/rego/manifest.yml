@@ -1,6 +1,6 @@
 ---
 applications:
-- name: my-rego
+- name: my-ams
   memory: 64M
   disk: 64M
   buildpacks:
