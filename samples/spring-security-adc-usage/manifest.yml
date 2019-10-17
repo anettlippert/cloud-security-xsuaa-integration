@@ -1,10 +1,7 @@
 ---
-# Configuration:
-# configured for EU10. For other landscapes, please adopt LANDSCAPE_APPS_DOMAIN in ../vars.yml
-# If the route is occupied, you might need to change ID in ../vars.yml
 applications:
 - name: adc-user
-  memory: 1G
+  memory: 800M
   timeout: 360
   routes:
     - route: adc-user-1234.cfapps.sap.hana.ondemand.com
@@ -13,11 +10,10 @@ applications:
     - https://github.com/saescha/opa-builpack-PoC.git
     - java_buildpack
   services:
-    - uaa-bulletinboard
+    - xsuaa
   env:
-    ADC_URL: http://localhost:8181
-    
-    
+    JBP_CONFIG_OPEN_JDK_JRE: '[memory_calculator: {headroom: 10}]'
+      
 # Application Router as web server
 - name: approuter
   path: approuter
@@ -27,7 +23,7 @@ applications:
   routes:
     - route: approuter-1234.cfapps.sap.hana.ondemand.com
   services:
-    - uaa-bulletinboard
+    - xsuaa
   env:
     TENANT_HOST_PATTERN: "^(.*)-approuter-1234.cfapps.sap.hana.ondemand.com"
     destinations: >

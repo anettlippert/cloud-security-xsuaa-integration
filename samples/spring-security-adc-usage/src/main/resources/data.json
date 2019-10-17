@@ -7,37 +7,59 @@
             "Viewer",
             "Administrator"
         ],
-        "test_collection": [
-        "Viewer"
-        ]
-    },
-    "roles_scopes": {
-        "Viewer": [
-            "bulletinboard-d044288!t3178.Read"
+        "Viewer2": [
+            "Viewer"
         ],
-        "Administrator": [
-            "bulletinboard-d044288!t3178.Read",
-            "bulletinboard-d044288!t3178.Admin"
-        ]
-    },
-    "roles_attributes": {
-        "Viewer": {
-            "confidentiality_level": [
-                "PUBLIC"
+        "Changer": [
+                "Viewer"
             ]
         },
-        "Administrator": {
-            "confidentiality_level": [
-                "PUBLIC",
-                "INTERNAL",
-                "CONFIDENTIAL",
-                "STRICTLY_CONFIDENTIAL"
+        "roles_scopes": {
+            "Viewer": [
+                "adc-user!t3178.Read"
+            ],
+            "Administrator": [
+                "adc-user!t3178.Read",
+                "adc-user!t3178.Admin"
+            ],
+            "Changer": [
+                "adc-user!t3178.Read",
+                "adc-user!t3178.Write"
+            ],
+            "Changer2": [
+                "adc-user!t3178.Read",
+                "adc-user!t3178.Write"
+            ],
+            "Changer3": [
+                "adc-user!t3178.Read",
+                "adc-user!t3178.Admin"
             ]
         },
-        "AccessGroupMember": {
-            "group": [
-                "G1"
-            ]
+        "roles_attributes": {
+            "Viewer": {
+                "confidentiality_level": [
+                    "PUBLIC"
+                ]
+            },
+            "Administrator": {
+                "confidentiality_level": [
+                    "PUBLIC",
+                    "INTERNAL",
+                    "CONFIDENTIAL",
+                    "STRICTLY_CONFIDENTIAL"
+                ]
+            },
+            "Viewer2": {
+                "confidentiality_level": [
+                    "PUBLIC",
+                    "INTERNAL"
+                ]
+            },
+            "AccessGroupMember": {
+                "group": [
+                    "G1"
+                ]
+            }
         }
     }
 }

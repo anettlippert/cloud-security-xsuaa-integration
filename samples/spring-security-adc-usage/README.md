@@ -25,8 +25,7 @@ Run maven to package the application
 ```shell
 mvn clean package -DskipTests
 ```
-> Note: As of now the JUnit tests may not run unless you've configured the Url of the Authorization Decision Controller (`ADC_URL`) as part of system environment variable or via the [application-uaamock.properties](src/main/resources/application-uaamock.properties). 
-After successful deployment you can enter the ADC service url or alternatively you can refer to a ADC service that runs locally, e.g. in a docker container.
+> Note: As of now the JUnit tests may not run unless you've running a OPA server locally.
 
 ## Create the XSUAA Service Instance
 Use the [xs-security.json](./xs-security.json) to define the authentication settings and create a service instance

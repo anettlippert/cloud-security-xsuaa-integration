@@ -20,11 +20,17 @@ public class MethodSecurityConfiguration extends GlobalMethodSecurityConfigurati
 	@Autowired(required = false)
 	private RestTemplate restTemplate;
 
-	@Value("${ADC_URL}")
+	@Value("${ADC_URL:#{null}}")
 	private String adcUrl;
-
+	
+	
 	@Override
 	protected MethodSecurityExpressionHandler createExpressionHandler() {
+	    
+	    if (adcUrl == null) {
+	        adcUrl = "http://localhost:8181";
+	    }
+	    
 		RestTemplate restTemplate = this.restTemplate != null ? this.restTemplate : new RestTemplate();
 		ADCSecurityExpressionHandler expressionHandler =
 				new ADCSecurityExpressionHandler(xsuaaServiceConfiguration, restTemplate, adcUrl);
